@@ -12,9 +12,9 @@ var playerimage;
 var playerArrow = [];
 
 function preload() {
-  backgroundImg = loadImage("./assets/background.png");
-  baseimage = loadImage("./assets/base.png");
-  playerimage = loadImage("./assets/player.png");
+  backgroundImg = loadImage("background.png");
+  baseimage = loadImage("base.png");
+  playerimage = loadImage("player.png");
 }
 
 function setup() {
@@ -59,9 +59,10 @@ function draw() {
   playerArcher.display();
   arrow.display();
   
-  for (let index = 0; index < playerArrow.length; index++) {
-    display(PlayerArrow[index], index);
-    
+  for (var i = 0; i < playerArrow.length; i++) {
+    if (playerArrow[i] !== undefined) {
+      playerArrow[i].display();
+    }
   }
   
   if (keyCode === 32) {
@@ -78,13 +79,14 @@ function draw() {
 
 function keyPressed() {
   if(keyCode === 32) {
-    var posX = playerArcher.body.position.x;
-    var posY = playerArcher.body.position.y;
-    var angle = playerArcher.body.angle;
-    var arrow = new PlayerArrow(posX, posY, 100, 10, angle)
+      var posX = playerArcher.body.position.x;
+      var posY = playerArcher.body.position.y;
+      var angle = playerArcher.body.angle;
 
-    Matter.Body.setAngle(arrow.body, angle);
-    playerArrow.push(arrow);
+      var arrow = new PlayerArrow(posX, posY, 100, 10, angle);
+
+      Matter.Body.setAngle(arrow.body, angle);
+      playerArrow.push(arrow);
 
   }
 }
